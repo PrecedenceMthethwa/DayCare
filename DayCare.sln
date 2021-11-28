@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayCare", "DayCare\DayCare.csproj", "{A246DB3B-DF64-4E48-B19F-6345E98994AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayCare.Tests", "DayCare.Tests\DayCare.Tests.csproj", "{4D76BA42-1583-4124-BA3F-63BB4FE39A80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A246DB3B-DF64-4E48-B19F-6345E98994AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A246DB3B-DF64-4E48-B19F-6345E98994AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A246DB3B-DF64-4E48-B19F-6345E98994AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A246DB3B-DF64-4E48-B19F-6345E98994AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D76BA42-1583-4124-BA3F-63BB4FE39A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D76BA42-1583-4124-BA3F-63BB4FE39A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D76BA42-1583-4124-BA3F-63BB4FE39A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D76BA42-1583-4124-BA3F-63BB4FE39A80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3967587-BA90-4A5E-ADD6-87CE5D85ECAC}
+	EndGlobalSection
+EndGlobal

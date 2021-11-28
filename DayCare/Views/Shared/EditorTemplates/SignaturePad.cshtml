@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "SignaturePad";
+}
+
+
+@model byte[]
+
+
+
+<div class="signature-pad">
+    <div class="card border-danger mb-3" style="max-width: 20rem;">
+        <div class="card-header">Sign here</div>
+        <div class="card-body">
+           <p class="card-text"> <canvas class="panel panel-default"></canvas></p>
+        </div>
+    </div> 
+    <button type="button" class="btn btn-primary btn-sm btn-clear-canvas">Clear</button>
+    @Html.HiddenFor(model => model, ViewData["htmlAttributes"])
+</div>

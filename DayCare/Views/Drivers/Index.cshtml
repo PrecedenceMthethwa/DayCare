@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DayCare.Models.Driver>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Drivers</h2>
+
+<p>
+    @Html.ActionLink("Add New Driver", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_IDNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_CellNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driver_Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diver_Image)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Driver_IDNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Driver_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Driver_Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Driver_CellNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Driver_Email)
+        </td>
+        <td>
+            @if (item.Diver_Image != null)
+            {
+                var base64 = Convert.ToBase64String(item.Diver_Image);
+                var ImgSource = string.Format("data:image/gif;base64,{0}", base64);
+                <img class="card-img-top" src="@ImgSource" alt="Card image" width="150" height="250" />
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Driver_ID }) |
+            @Html.ActionLink("Archive", "Delete", new { id=item.Driver_ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "SignaturePad";
+}
+
+<h2></h2>
+
+@model byte[]
+
+<div class="signature-pad">
+    <canvas class="panel panel-default"></canvas>
+    @Html.HiddenFor(model => model, new { @disabled = "disabled" })
+</div>

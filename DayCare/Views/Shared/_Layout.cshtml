@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+	<title>@ViewBag.Title - Glory Land Day Care</title>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Glory Land DayCare", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					@if (User.IsInRole("Client"))
+					{
+
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("Details", "Clients")">My Profile</a>
+						</li>
+					}
+
+					@if (User.IsInRole("Admin"))
+					{
+						<li>@Html.ActionLink("Process Applications", "Index", "Children")</li>
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("Create", "Drivers")">Add New driver</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("Create", "Employees")">Add new employee</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("Create", "Deliverystatus")">Add Delivery Status</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("AddRole", "Roles")">User Roles</a>
+						</li>
+					}
+
+					@if (User.IsInRole("Employee"))
+					{
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("ClassRoom", "ClassRooms")">My Class</a>
+						</li>
+
+					}
+
+					@if (User.IsInRole("Driver"))
+					{
+
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("Details", "Drivers")">My Profile</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="@Url.Action("WithDriver", "ClassRooms")">Delivery</a>
+						</li>
+						<li>@Html.Action("NumberCollect", "ClassRooms")</li>
+					}
+					
+					@if (!User.IsInRole("Admin") && !User.IsInRole("Driver") && !User.IsInRole("Employee") && !User.IsInRole("Client"))
+					{
+
+						<li>@Html.ActionLink("About", "About", "Home")</li>
+						<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+						<li>@Html.ActionLink("Apply day care", "Create", "Parents")</li>
+					}
+				</ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Smart DayCare</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

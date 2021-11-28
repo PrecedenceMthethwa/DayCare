@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DayCare.Models.ClassRoom>
+
+@{
+	ViewBag.Title = "CollectChild";
+}
+
+<h2>My Collection</h2>
+<hr />
+<br />
+
+<div class="row">
+	@foreach (var item in Model)
+	{
+		{
+
+			<div class="col-md-3">
+				<div class="container">
+
+					<div class="card" style="width:250px">
+						<div class="row">
+							@if (item.Child.Child_Image != null)
+							{
+								var base64 = Convert.ToBase64String(item.Child.Child_Image);
+								var ImgSource = string.Format("data:image/gif;base64,{0}", base64);
+								<img src="@ImgSource" alt="Card image" width="250" height="250" />
+
+							}
+							@{
+								DayCare.Models.ApplicationDbContext db = new DayCare.Models.ApplicationDbContext();
+
+								var contract = (from i in db.QRCodes
+												where i.Child_Id == item.Child_Id
+												select i).FirstOrDefault();
+								if (contract != null && !String.IsNullOrEmpty(contract.QRCodeImagePath))
+								{
+									<center>
+										<img src="@Url.Content(contract.QRCodeImagePath)" alt="Image" height="250" width="250" />
+									</center>
+								}}
+						</div>
+						<div class="card-body">
+							<p class="card-text">Name & Surname: @Html.DisplayFor(modelItem => item.Child.Child_Name) @Html.DisplayFor(modelItem => item.Child.Child_LastName)</p>
+							<p class="card-text">Identity Number: @Html.DisplayFor(modelItem => item.Child_Id)</p>
+							<p class="card-text">Address: @Html.DisplayFor(modelItem => item.Child.Parent.Parent_Address)</p>
+							<p class="card-text">Child has aftercare: @Html.DisplayFor(modelItem => item.Child.AfterCare)</p>
+							<a href='@Url.Action("Details", "ClassRooms", new { id = item.Room_Id }, null)' class="btn btn-success">Navigate</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		}
+
+	}
+</div>
+<br />

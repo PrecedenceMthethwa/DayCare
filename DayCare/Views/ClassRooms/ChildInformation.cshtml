@@ -1,0 +1,189 @@
+﻿@model DayCare.Models.QRCode
+
+@helper Truncate(string input, int length)
+{
+	if (input.Length <= length)
+	{
+		@input
+	}
+	else
+	{
+		@input.Substring(0, length)<text>...</text>
+	}
+}
+@{ ViewBag.Title = "Details"; }
+
+
+<h2><b>child tag</b></h2>
+
+
+<h2 style="text-align:center;">Tag</h2>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<style>
+		.invoice-box {
+			max-width: 800px;
+			margin: auto;
+			padding: 30px;
+			border: 1px solid #eee;
+			box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+			font-size: 16px;
+			line-height: 24px;
+			font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			color: #555;
+		}
+
+			.invoice-box table {
+				width: 100%;
+				line-height: inherit;
+				text-align: left;
+			}
+
+				.invoice-box table td {
+					padding: 5px;
+					vertical-align: top;
+				}
+
+				.invoice-box table tr td:nth-child(2) {
+					text-align: right;
+				}
+
+				.invoice-box table tr.top table td {
+					padding-bottom: 20px;
+				}
+
+					.invoice-box table tr.top table td.title {
+						font-size: 45px;
+						line-height: 45px;
+						color: #333;
+					}
+
+				.invoice-box table tr.information table td {
+					padding-bottom: 40px;
+				}
+
+				.invoice-box table tr.heading td {
+					background: #eee;
+					border-bottom: 1px solid #ddd;
+					font-weight: bold;
+				}
+
+				.invoice-box table tr.details td {
+					padding-bottom: 20px;
+				}
+
+				.invoice-box table tr.item td {
+					border-bottom: 1px solid #eee;
+				}
+
+				.invoice-box table tr.item.last td {
+					border-bottom: none;
+				}
+
+				.invoice-box table tr.total td:nth-child(2) {
+					border-top: 2px solid #eee;
+					font-weight: bold;
+				}
+
+		@@media only screen and (max-width: 600px) {
+			.invoice-box table tr.top table td {
+				width: 100%;
+				display: block;
+				text-align: center;
+			}
+
+			.invoice-box table tr.information table td {
+				width: 100%;
+				display: block;
+				text-align: center;
+			}
+		}
+
+		/** RTL **/
+		.rtl {
+			direction: rtl;
+			font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+		}
+
+			.rtl table {
+				text-align: right;
+			}
+
+				.rtl table tr td:nth-child(2) {
+					text-align: left;
+				}
+	</style>
+</head>
+<body>
+	<div class="invoice-box">
+		<table cellpadding="0" cellspacing="0">
+			<tr class="top">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td class="title">
+
+								<div class="col-md-10">
+									@{
+										DayCare.Models.ApplicationDbContext db = new DayCare.Models.ApplicationDbContext();
+
+										var contract = (from i in db.QRCodes
+														where i.QRId == Model.QRId
+														select i).SingleOrDefault();
+										if (Model != null && !String.IsNullOrEmpty(contract.QRCodeImagePath))
+										{
+											<center>
+												<img src="@Url.Content(contract.QRCodeImagePath)" alt="Image" height="250" width="250" />
+											</center>
+										}}
+
+								</div>
+							</td>
+
+							<td>
+								Tag No #:  @Html.DisplayFor(model => model.QRId)<br>
+								Date Created:  @Html.DisplayFor(model => model.Child.Payment_Date)<br>
+								@*2020/07/23*@
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr class="information">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td>
+								@*20 Crest Road<br>
+			Durban North <br>
+			Durban 4051*@
+								@Truncate(Model.Child.Parent.Parent_Address, 25)<br />
+							</td>
+
+							<td>
+
+								child Information<br />
+								@Html.DisplayFor(model => model.Child.Child_Name) @Html.DisplayFor(model => model.Child.Child_LastName) <br>
+								@Html.DisplayFor(model => model.Child.Child_Id)<br />
+							</td>
+							<td>
+
+								Contact Information<br>
+								Parent Name & Surname: 	@Html.DisplayFor(model => model.Child.Parent.Parent_Name) @Html.DisplayFor(model => model.Child.Parent.Parent_LastName) <br>
+								Phone: @Html.DisplayFor(model => model.Child.Parent.Parent_ContactNumber)<br />
+								Email: @Html.DisplayFor(model => model.Child.Parent.Parent_Email)<br />
+							</td>
+						</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+
+		</div>
+	</body>
+</html>
+<a href='@Url.Action("ViewThisPDF", "ClassRooms", new { id = Model.QRId })' class="btn btn-primary">Download As PDF</a>
+

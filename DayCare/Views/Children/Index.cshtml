@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DayCare.Models.Child>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Children  Applications</h2>
+<hr />
+<br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="container">
+                <div class="card" style="width:250px">
+                    @if (item.Child_Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.Child_Image);
+                        var ImgSource = string.Format("data:image/gif;base64,{0}", base64);
+                        <img class="card-img-top" src="@ImgSource" alt="Card image" width="150" height="300" />
+                    }
+                    <div class="card-body">
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Child_Name)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Child_LastName)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Parent.Parent_ContactNumber)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Parent.Parent_Email)</p>
+
+
+                        <a href="@Url.Action("FullScreen","Children", new {id= item.Child_Id})" class="btn btn-primary btn-sm">
+                            <p>View full Screen</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+    <br />
+

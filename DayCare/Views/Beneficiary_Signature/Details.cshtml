@@ -1,0 +1,50 @@
+﻿@model DayCare.Models.Beneficiary_Signature
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Beneficiary_Signature</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Child.Child_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child.Child_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sign_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sign_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MySignature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MySignature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SignedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SignedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Signaturee_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
